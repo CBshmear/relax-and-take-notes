@@ -61,16 +61,16 @@ app.post("/api/notes", (req, res) => {
     return;
   }
 
-  app.get("/api/notes", (req, res) => {
-    const noteData = require("./db/db.json");
-    res.json(noteData);
-  });
   // console.log("UH?!");
   // res.status(500).json({
   //   message: "It should be impossible to hit this code. Congratulations",
   // });
 });
 
+app.get("/api/notes", (req, res) => {
+  const noteData = require("./db/db.json");
+  res.json(noteData);
+});
 //app.get("/", (req, res) => res.send("Navigate to /send or /routes"));
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "public/notes.html"))
