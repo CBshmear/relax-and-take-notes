@@ -40,7 +40,7 @@ const saveNote = (note) =>
       "Content-Type": "application/json",
     },
     body: JSON.stringify(note),
-  }).then(() => window.location.reload());
+  });
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -71,10 +71,12 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+  saveNote(newNote)
+    .then(() => {
+      getAndRenderNotes();
+      renderActiveNote();
+    })
+    .then(window.location.reload);
 };
 
 // Delete the clicked note
