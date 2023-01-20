@@ -9,16 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get("/api/notes", (req, res) => {
-  const noteData = require("./db/db.json");
-  res.json(noteData);
-});
-
-app.get("/api/notes/id", (req, res) => {
-  const noteData = require("./db/db.json");
-  req.JSON(noteData);
-});
-//app.get("/", (req, res) => res.send("Navigate to /send or /routes"));
+app.get("/", (req, res) => res.send("Navigate to /send or /routes"));
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "public/notes.html"))
 );
@@ -44,20 +35,21 @@ app.post("/api/notes", (req, res) => {
       } else {
         console.log("No error! Continuing");
         const parsedNotes = JSON.parse(data);
-
         parsedNotes.push(newNote);
+        console.log(parsedNotes);
 
         fs.writeFile(
           "./db/db.json",
           JSON.stringify(parsedNotes, null, 4),
           (writeErr) => {
-            console.log("In writeFileSync callback");
+            console.log("In writeFile callback");
             if (writeErr) {
               console.error(writeErr);
               res.status(500).json(writeErr);
             } else {
               console.info("Successfully updated notes!");
               res.json("Success!");
+              window.location.reload();
             }
             return;
           }
@@ -74,6 +66,14 @@ app.post("/api/notes", (req, res) => {
   // res.status(500).json({
   //   message: "It should be impossible to hit this code. Congratulations",
   // });
+});
+app.get("/api/notes/id", (req, res) => {
+  const noteData = require("./db/db.json");
+  req.JSON(noteData);
+});
+app.get("/api/notes", (req, res) => {
+  const noteData = require("./db/db.json");
+  res.json(noteData);
 });
 
 // app.delete("/api/notes/:id", (req, res) => {
