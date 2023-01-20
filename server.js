@@ -33,7 +33,7 @@ app.post("/api/notes", (req, res) => {
       id: uuid(),
     };
 
-    fs.readFile("./db/db.json", "utf8", (err, data) => {
+    fs.readFileSync("./db/db.json", "utf8", (err, data) => {
       if (err) {
         console.error(err);
       } else {
@@ -41,20 +41,22 @@ app.post("/api/notes", (req, res) => {
 
         parsedNotes.push(newNote);
 
-        fs.writeFile(
+        fs.writeFileSync(
           "./db/db.json",
           JSON.stringify(parsedNotes, null, 4),
           (writeErr) => {
-            writeErr
-              ? console.error(writeErr)
-              : console.info("Successfully updated notes!");
+            if (writeErr) {
+              console.error(writeErr);
+            } else {
+              console.info("Successfully updated notes!");
+              res.header("Refresh", 1);
+              res.json("Success!");
+            }
           }
         );
       }
     });
   }
-  res.header("Refresh", 1);
-  res.json("Hi");
 });
 
 // app.delete("/api/notes/:id", (req, res) => {
