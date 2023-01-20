@@ -32,7 +32,7 @@ app.post("/api/notes", (req, res) => {
     let newNote = {
       title,
       text,
-      note_id: uuid(),
+      id: uuid(),
     };
     console.log("Past the let");
     try {
@@ -71,6 +71,11 @@ app.post("/api/notes", (req, res) => {
     console.log("In the else");
     res.status(400).json({ message: "Missing required parameters" });
   }
+
+  console.log("UH?!");
+  res.status(500).json({
+    message: "It should be impossible to hit this code. Congratulations",
+  });
 });
 
 // app.delete("/api/notes/:id", (req, res) => {
