@@ -35,47 +35,45 @@ app.post("/api/notes", (req, res) => {
       id: uuid(),
     };
     console.log("Past the let");
-    try {
-      fs.readFile("./db/db.json", "utf8", (err, data) => {
-        console.log("In readFile callback");
-        if (err) {
-          console.error(err);
-          res.status(500).json(err);
-        } else {
-          console.log("No error! Continuing");
-          const parsedNotes = JSON.parse(data);
 
-          parsedNotes.push(newNote);
+    fs.readFile("./db/db.json", "utf8", (err, data) => {
+      console.log("In readFile callback");
+      if (err) {
+        console.error(err);
+        res.status(500).json(err);
+      } else {
+        console.log("No error! Continuing");
+        const parsedNotes = JSON.parse(data);
 
-          fs.writeFile(
-            "./db/db.json",
-            JSON.stringify(parsedNotes, null, 4),
-            (writeErr) => {
-              console.log("In writeFileSync callback");
-              if (writeErr) {
-                console.error(writeErr);
-                res.status(500).json(writeErr);
-              } else {
-                console.info("Successfully updated notes!");
-                res.json("Success!");
-              }
+        parsedNotes.push(newNote);
+
+        fs.writeFile(
+          "./db/db.json",
+          JSON.stringify(parsedNotes, null, 4),
+          (writeErr) => {
+            console.log("In writeFileSync callback");
+            if (writeErr) {
+              console.error(writeErr);
+              res.status(500).json(writeErr);
+            } else {
+              console.info("Successfully updated notes!");
+              res.json("Success!");
             }
-          );
-        }
-      });
-    } catch (e) {
-      console.log("THE ERROR?!");
-      res.status(500).json(e);
-    }
+            return;
+          }
+        );
+      }
+    });
   } else {
     console.log("In the else");
     res.status(400).json({ message: "Missing required parameters" });
+    return;
   }
 
-  console.log("UH?!");
-  res.status(500).json({
-    message: "It should be impossible to hit this code. Congratulations",
-  });
+  // console.log("UH?!");
+  // res.status(500).json({
+  //   message: "It should be impossible to hit this code. Congratulations",
+  // });
 });
 
 // app.delete("/api/notes/:id", (req, res) => {
