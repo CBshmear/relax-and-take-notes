@@ -9,6 +9,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+app.get("/api/notes", (req, res) => {
+  const noteData = require("./db/db.json");
+  res.json(noteData);
+});
+
+app.get("/api/notes/id", (req, res) => {
+  const noteData = require("./db/db.json");
+  req.JSON(noteData);
+});
 //app.get("/", (req, res) => res.send("Navigate to /send or /routes"));
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "public/notes.html"))
@@ -48,15 +57,6 @@ app.post("/api/notes", (req, res) => {
   res.json("Hi");
 });
 
-app.get("/api/notes", (req, res) => {
-  const noteData = require("./db/db.json");
-  res.json(noteData);
-});
-
-app.get("/api/notes/id", (req, res) => {
-  const noteData = require("./db/db.json");
-  req.JSON(noteData);
-});
 // app.delete("/api/notes/:id", (req, res) => {
 //   const requestedTerm = req.params.noteId;
 //   fs.readFile("./db/db.json", "utf8", (err, data) => {
