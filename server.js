@@ -13,10 +13,6 @@ app.get("/api/notes/:id", (req, res) => {
   const noteData = require("./db/db.json");
   req.JSON(noteData);
 });
-app.get("/api/notes", (req, res) => {
-  const noteData = require("./db/db.json");
-  res.json(noteData);
-});
 
 app.post("/api/notes", (req, res) => {
   console.log("OH HEY!!!!!!");
@@ -65,6 +61,10 @@ app.post("/api/notes", (req, res) => {
     return;
   }
 
+  app.get("/api/notes", (req, res) => {
+    const noteData = require("./db/db.json");
+    res.json(noteData);
+  });
   // console.log("UH?!");
   // res.status(500).json({
   //   message: "It should be impossible to hit this code. Congratulations",
