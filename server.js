@@ -8,7 +8,8 @@ const fs = require("fs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.get("/api/notes/id", (req, res) => {
+
+app.get("/api/notes/:id", (req, res) => {
   const noteData = require("./db/db.json");
   req.JSON(noteData);
 });
