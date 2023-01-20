@@ -70,10 +70,10 @@ app.post("/api/notes", (req, res) => {
     return;
   }
 
-  console.log("UH?!");
-  res.status(500).json({
-    message: "It should be impossible to hit this code. Congratulations",
-  });
+  // console.log("UH?!");
+  // res.status(500).json({
+  //   message: "It should be impossible to hit this code. Congratulations",
+  // });
 });
 
 // app.delete("/api/notes/:id", (req, res) => {
