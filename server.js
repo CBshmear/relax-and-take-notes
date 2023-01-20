@@ -24,6 +24,7 @@ app.get("/notes", (req, res) =>
 );
 
 app.post("/api/notes", (req, res) => {
+  console.log("OH HEY!!!!!!");
   const { title, text } = req.body;
 
   if (title && text) {
