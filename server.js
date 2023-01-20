@@ -36,6 +36,7 @@ app.post("/api/notes", (req, res) => {
     fs.readFileSync("./db/db.json", "utf8", (err, data) => {
       if (err) {
         console.error(err);
+        res.status(500).json(err);
       } else {
         const parsedNotes = JSON.parse(data);
 
@@ -47,9 +48,9 @@ app.post("/api/notes", (req, res) => {
           (writeErr) => {
             if (writeErr) {
               console.error(writeErr);
+              res.status(500).json(writeErr);
             } else {
               console.info("Successfully updated notes!");
-              res.header("Refresh", 1);
               res.json("Success!");
             }
           }
