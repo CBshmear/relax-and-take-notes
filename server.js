@@ -29,15 +29,15 @@ app.post("/api/notes", (req, res) => {
 
   if (title && text) {
     console.log(`In the if with title ${title} and text ${text}`);
-    newNote = {
+    let newNote = {
       title,
       text,
-      id: uuid(),
+      note_id: uuid(),
     };
-
+    console.log("Past the let");
     try {
-      fs.readFileSync("./db/db.json", "utf8", (err, data) => {
-        console.log("In readFyleSync callback");
+      fs.readFile("./db/db.json", "utf8", (err, data) => {
+        console.log("In readFile callback");
         if (err) {
           console.error(err);
           res.status(500).json(err);
@@ -47,7 +47,7 @@ app.post("/api/notes", (req, res) => {
 
           parsedNotes.push(newNote);
 
-          fs.writeFileSync(
+          fs.writeFile(
             "./db/db.json",
             JSON.stringify(parsedNotes, null, 4),
             (writeErr) => {
@@ -71,11 +71,6 @@ app.post("/api/notes", (req, res) => {
     console.log("In the else");
     res.status(400).json({ message: "Missing required parameters" });
   }
-
-  console.log("UH?!");
-  res.status(500).json({
-    message: "It should be impossible to hit this code. Congratulations",
-  });
 });
 
 // app.delete("/api/notes/:id", (req, res) => {
