@@ -64,10 +64,6 @@ app.post("/api/notes", (req, res) => {
         );
       }
     });
-  } else {
-    console.log("In the else");
-    res.status(400).json({ message: "Missing required parameters" });
-    return;
   }
 
   // console.log("UH?!");
