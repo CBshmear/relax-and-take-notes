@@ -56,7 +56,8 @@ app.post("/api/notes", (req, res) => {
               res.status(500).json(writeErr);
             } else {
               console.info("Successfully updated notes!");
-              res.json("Success!").then(() => window.location.reload());
+              res.json("Success!");
+              window.location.reload();
             }
             return;
           }
