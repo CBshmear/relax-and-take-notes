@@ -57,7 +57,6 @@ app.post("/api/notes", (req, res) => {
             } else {
               console.info("Successfully updated notes!");
               res.json("Success!");
-              window.location.reload();
             }
             return;
           }
