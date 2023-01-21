@@ -1,7 +1,7 @@
 # relax-and-take-notes
 
 ## Description
-This repo contains the code for a notetaker app powered by Express. I wanted a way to save notes on varying topics that would be saved and easily accessible at any time. I had difficulties with heroku. The app functions fine locally and does everything required by the user, but when deployed on heroku it loses the ability to save new notes. When i attempt to remedy this it crashes on heroku. I will have to put more time into fixing the deployment in the future. 
+This repo contains the code for a notetaker app powered by Express. I wanted a way to save notes on varying topics that would be saved and easily accessible at any time. I had difficulties with heroku. The app functions fine locally and does everything required by the user, but when deployed on heroku it loses the ability to save new notes consistently. Sometimes it works, other times it throws no error but doesnt save or return the new note. When i attempt to remedy this it crashes on heroku. I will have to put more time into fixing the deployment in the future. 
 
 ## Installation
 Run npm i to install express
